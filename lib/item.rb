@@ -1,4 +1,4 @@
-class item
+class Item
   IMPORT_TAX_RATE = 0.05
   BASE_TAX_RATE = 0.1
 
@@ -12,12 +12,14 @@ class item
     @unit_price = unit_price
   end
 
+  attr_reader :description, :quantity
+
   def total_cost
-    @total_cost = calculate_total_cost
+    @total_cost ||= calculate_total_cost
   end
 
   def total_taxes
-    @total_taxes = calculate_total_taxes
+    @total_taxes ||= calculate_total_taxes
   end
 
   private
