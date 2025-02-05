@@ -56,10 +56,10 @@ class Main
   end
 
   def list_available_items
-    puts 'Available items:'
+    puts 'Available items: (Some products are subject to Taxes)'
     puts "-----------------"
     AVAILABLE_ITEMS.each do |item|
-      puts "#{item[:description]}"
+      puts "#{item[:description]}: $#{'%.2f' % item[:price]}"
     end
     puts
     puts 'enter items following the format "|quantity| |item description| at |price|".'
