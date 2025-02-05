@@ -18,9 +18,7 @@ class Main
 
   def call
     welcome_message
-    items = fetch_item_input
-    invoice = Invoice.new(items: items)
-    display_results(invoice)
+    display_results(Invoice.new(items: fetch_item_input))
   end
 
   private
@@ -50,11 +48,12 @@ class Main
         else
           items << create_item(item_data)
           puts 'Item added!'
-          puts 'type "ok" to complete your market or type "quit" to exit'
-          puts "---------------------------------------------------------"
+          puts 'continue or type "ok" to complete your market. Type "quit" to exit'
+          puts "------------------------------------------------------------------"
         end
       end
     end
+
     items
   end
 
@@ -63,7 +62,7 @@ class Main
   end
 
   def log_error(input)
-    error_messages << "Item: '#{input}' could not be processed\n"
+    error_messages << "Item: '#{input}' does not exists\n"
   end
 
   def create_item(item_data)
@@ -76,14 +75,15 @@ class Main
 
   def display_results(invoice)
     puts error_messages
-    puts 'Your Invoice:'
+    puts 'Your Invoice         |'
+    puts '---------------------'
     puts invoice.details
   end
 
   def help_commands
     puts <<~HELP
       Available commands:
-        finish: Complete the item entry
+        ok: Complete the item entry
         quit: Quit the program
         help: Display this message
         list: List all available items
