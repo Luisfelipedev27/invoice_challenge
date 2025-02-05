@@ -1,3 +1,6 @@
+require_relative 'item'
+require_relative 'invoice'
+
 class Main
   AVAILABLE_ITEMS = [
     { description: 'book', price: 12.49 },
@@ -16,6 +19,8 @@ class Main
   def call
     welcome_message
     items = fetch_item_input
+    invoice = Invoice.new(items: items)
+    display_results(invoice)
   end
 
   private
@@ -38,11 +43,41 @@ class Main
         when 'list'
           list_available_items
         else
-          []
+          item_data = parse_item_input(input)
+          if item_data.nil?
+            log_error(input)
+          else
+            items << create_item(item_data)
+            puts 'Item added!'
+            puts 'type "ok" to complete your market or type "quit" to exit'
+            puts "---------------------------------------------------------"
+          end
+        end
       end
-    end
 
     items
+  end
+
+  def parse_item_input(input)
+    /(?<quantity>\d+)\s(?<description>([a-zA-Z]+\s*)+)\sat\s(?<price>(\d+\.\d{2}))/.match(input)
+  end
+
+  def log_error(input)
+    error_messages << "Item: '#{input}' could not be processed\n"
+  end
+
+  def create_item(item_data)
+    Item.new(
+      description: item_data[:description],
+      quantity: item_data[:quantity].to_i,
+      unit_price: item_data[:price].to_f
+    )
+  end
+
+  def display_results(invoice)
+    puts error_messages
+    puts 'Your Invoice:'
+    puts invoice.details
   end
 
   def help_commands
