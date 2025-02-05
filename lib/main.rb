@@ -6,4 +6,13 @@ class Main
     { description: 'imported box of chocolates', price: 10.00 },
     { description: 'imported bottle of perfume', price: 47.50 }
   ].freeze
+
+  def initialize
+    error_messages = ''
+  end
+
+  def call
+  end
+
+  private
 end
