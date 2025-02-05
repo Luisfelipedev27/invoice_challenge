@@ -32,29 +32,29 @@ class Main
 
   def fetch_item_input
     items = []
-
     loop do
       input = gets.chomp
       case input.downcase
-        when 'ok'
-          break
-        when 'help'
-          help_commands
-        when 'list'
-          list_available_items
+      when 'ok'
+        break
+      when 'quit'
+        exit
+      when 'help'
+        help_commands
+      when 'list'
+        list_available_items
+      else
+        item_data = parse_item_input(input)
+        if item_data.nil?
+          log_error(input)
         else
-          item_data = parse_item_input(input)
-          if item_data.nil?
-            log_error(input)
-          else
-            items << create_item(item_data)
-            puts 'Item added!'
-            puts 'type "ok" to complete your market or type "quit" to exit'
-            puts "---------------------------------------------------------"
-          end
+          items << create_item(item_data)
+          puts 'Item added!'
+          puts 'type "ok" to complete your market or type "quit" to exit'
+          puts "---------------------------------------------------------"
         end
       end
-
+    end
     items
   end
 
