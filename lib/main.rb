@@ -14,7 +14,13 @@ class Main
   end
 
   def call
+    welcome_message
   end
 
   private
+
+  def welcome_message
+    puts 'Welcome to Market! Please enter items following the format "|quantity| |item description| at |price|".'
+    puts 'If you need help, type "help".'
+  end
 end
