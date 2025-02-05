@@ -7,8 +7,10 @@ class Main
     { description: 'imported bottle of perfume', price: 47.50 }
   ].freeze
 
+  attr_accessor :error_messages
+
   def initialize
-    error_messages = ''
+    self.error_messages = []
   end
 
   def call
