@@ -15,6 +15,7 @@ class Main
 
   def call
     welcome_message
+    help_commands
   end
 
   private
@@ -22,5 +23,15 @@ class Main
   def welcome_message
     puts 'Welcome to Market! Please enter items following the format "|quantity| |item description| at |price|".'
     puts 'If you need help, type "help".'
+  end
+
+  def help_commands
+    puts <<~HELP
+      Available commands:
+        finish: Complete the item entry
+        quit: Quit the program
+        help: Display this message
+        list: List all available items
+    HELP
   end
 end
