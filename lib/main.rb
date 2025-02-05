@@ -18,7 +18,7 @@ class Main
 
   def call
     welcome_message
-    display_results(Invoice.new(items: fetch_item_input))
+    display_invoice(Invoice.new(items: fetch_item_input))
   end
 
   private
@@ -73,7 +73,7 @@ class Main
     )
   end
 
-  def display_results(invoice)
+  def display_invoice(invoice)
     puts error_messages
     puts 'Your Invoice         |'
     puts '---------------------'
