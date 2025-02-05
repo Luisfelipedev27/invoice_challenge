@@ -15,7 +15,7 @@ class Main
 
   def call
     welcome_message
-    help_commands
+    items = fetch_item_input
   end
 
   private
@@ -23,6 +23,26 @@ class Main
   def welcome_message
     puts 'Welcome to Market! Please enter items following the format "|quantity| |item description| at |price|".'
     puts 'If you need help, type "help".'
+  end
+
+  def fetch_item_input
+    items = []
+
+    loop do
+      input = gets.chomp
+      case input.downcase
+        when 'ok'
+          break
+        when 'help'
+          help_commands
+        when 'list'
+          list_available_items
+        else
+          []
+      end
+    end
+
+    items
   end
 
   def help_commands
@@ -34,4 +54,16 @@ class Main
         list: List all available items
     HELP
   end
+
+  def list_available_items
+    puts 'Available items:'
+    puts "-----------------"
+    AVAILABLE_ITEMS.each do |item|
+      puts "#{item[:description]}"
+    end
+    puts
+    puts 'enter items following the format "|quantity| |item description| at |price|".'
+  end
 end
+
+Main.new.call
